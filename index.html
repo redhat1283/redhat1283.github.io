@@ -46,6 +46,7 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.25);
     }
     .panel h2{ margin:0 0 10px 0; font-size:16px; display:flex; align-items:center; gap:10px; }
+
     .icon{
       width:34px; height:34px;
       image-rendering: -webkit-optimize-contrast;
@@ -54,6 +55,19 @@
       background: var(--panel2);
       border:1px solid var(--border);
       padding:6px;
+    }
+    /* NEW: small inline icons for labels */
+    .miniIcon{
+      width:22px; height:22px;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      display:inline-block;
+      vertical-align:middle;
+      margin-right:8px;
+      border-radius:7px;
+      background: rgba(0,0,0,0.18);
+      border: 1px solid var(--border);
+      padding:2px;
     }
 
     .row{ display:grid; grid-template-columns: 1fr; gap:10px; margin-top:10px; }
@@ -169,7 +183,8 @@
 
       <div class="row cols3">
         <div>
-          <label>VIP Level (1–18)</label>
+          <!-- NEW: VIP icon -->
+          <label><img class="miniIcon" src="vip.png" alt="VIP" />VIP Level (1–18)</label>
           <select id="vipLevel" oninput="recalcAll()">
             <option value="0">None</option>
             <option value="1">VIP 1</option><option value="2">VIP 2</option><option value="3">VIP 3</option>
@@ -183,8 +198,10 @@
 
         <div class="checkRow">
           <input type="checkbox" id="efficientDev" oninput="recalcAll()" />
+          <!-- NEW: Efficient Dev icon -->
           <label for="efficientDev" style="margin:0;color:var(--text)">
-            🧠 Efficient Development (+10% to Building & Research)
+            <img class="miniIcon" src="eff_dev.png" alt="Efficient Development" />
+            Efficient Development (+10% to Building & Research)
           </label>
         </div>
 
@@ -737,8 +754,7 @@
       research: { total: researchTotal, final: researchFinal },
       breakdown: {
         buildVip, officeBuild: officeBonus.build, efficient, coopBuild, pyramidBuff, quickConstructionBuff, fastBuilderBuff, buildOther1, buildOther2,
-        researchVip, officeResearch: officeBonus.research, coopResearch, researchCenterBuff, quickResearchBuff, researchEnhBuff, s1,s2,s3,s4, researchOther1, researchOther2,
-        conquerorOn
+        researchVip, officeResearch: officeBonus.research, coopResearch, researchCenterBuff, quickResearchBuff, researchEnhBuff, s1,s2,s3,s4, researchOther1, researchOther2
       }
     };
   }
@@ -759,8 +775,7 @@
       chip("🤝 Quick Constr", b.quickConstructionBuff) +
       chip("🧩 Fast Builder", b.fastBuilderBuff) +
       chip("➕ Other 1", b.buildOther1) +
-      chip("➕ Other 2", b.buildOther2) +
-      (b.conquerorOn ? chip("🏆 Conqueror", 0) : "");
+      chip("➕ Other 2", b.buildOther2);
     setHTML(`${prefix}_buildChips`, buildChips || `<span class="tiny">No buffs selected.</span>`);
 
     // Research
@@ -778,13 +793,12 @@
       chip("🧩 Res Enhance", b.researchEnhBuff) +
       chip("🧍 S1", b.s1) + chip("🧍 S2", b.s2) + chip("🧍 S3", b.s3) + chip("🧍 S4", b.s4) +
       chip("➕ Other 1", b.researchOther1) +
-      chip("➕ Other 2", b.researchOther2) +
-      (b.conquerorOn ? chip("🏆 Conqueror", 0) : "");
+      chip("➕ Other 2", b.researchOther2);
     setHTML(`${prefix}_researchChips`, researchChips || `<span class="tiny">No buffs selected.</span>`);
   }
 
   // ===== Auto-save =====
-  const STORAGE_KEY = "lw_speed_calc_v3";
+  const STORAGE_KEY = "lw_speed_calc_v4";
 
   function collectState(){
     const ids = [
@@ -796,7 +810,7 @@
       "A_buildBase","A_coopBuild","A_pyramidLevel","A_quickConstructionLevel","A_fastBuilderLevel","A_buildBuff1","A_buildBuff2",
       "A_researchBase","A_coopResearch","A_researchCenterLevel","A_quickResearchLevel","A_researchEnhancementLevel",
       "A_survivor1","A_survivor2","A_survivor3","A_survivor4","A_researchBuff1","A_researchBuff2",
-      // B (still stored, even though most get overwritten from A)
+      // B (stored; shared fields overwritten from A)
       "B_buildBase","B_coopBuild","B_pyramidLevel","B_quickConstructionLevel","B_fastBuilderLevel","B_buildBuff1","B_buildBuff2",
       "B_researchBase","B_coopResearch","B_researchCenterLevel","B_quickResearchLevel","B_researchEnhancementLevel",
       "B_survivor1","B_survivor2","B_survivor3","B_survivor4","B_researchBuff1","B_researchBuff2"
@@ -838,20 +852,19 @@
   function copySetup(from){
     const to = from === "A" ? "B" : "A";
 
-    // copy office selection (allowed to differ, but copy button should copy it)
+    // copy office selection
     const fromOffice = getSelectedOffice(from);
     document.getElementById(`${to}_officeNone`).checked = (fromOffice === "none");
     document.getElementById(`${to}_officeDev`).checked  = (fromOffice === "dev");
     document.getElementById(`${to}_officeSci`).checked  = (fromOffice === "sci");
     document.getElementById(`${to}_officeVP`).checked   = (fromOffice === "vp");
 
-    // copy co-ops (allowed to differ)
+    // copy co-ops
     document.getElementById(`${to}_coopBuild`).value = document.getElementById(`${from}_coopBuild`).value;
     document.getElementById(`${to}_coopResearch`).value = document.getElementById(`${from}_coopResearch`).value;
 
-    // everything else is shared; A→B sync will handle it, but if copying B→A, do it here:
+    // if copying B->A, also copy shared fields back
     if (from === "B") {
-      // copy shared fields back to A (excluding co-ops + office)
       for (const key of SYNC_KEYS_A_TO_B){
         const a = document.getElementById(`A_${key}`);
         const b = document.getElementById(`B_${key}`);
@@ -893,8 +906,7 @@
 
   // ===== Main =====
   function recalcAll(){
-    // force B shared fields to match A (office + co-ops remain independent)
-    syncAtoBSharedFields();
+    syncAtoBSharedFields(); // keep B shared in sync with A
 
     const A = calcSetup("A");
     const B = calcSetup("B");
