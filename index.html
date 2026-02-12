@@ -58,7 +58,7 @@
     }
     /* NEW: small inline icons for labels */
     .miniIcon{
-      width:22px; height:22px;
+      width:50px; height: 50px;
       image-rendering: -webkit-optimize-contrast;
       image-rendering: crisp-edges;
       display:inline-block;
@@ -166,9 +166,6 @@
     <div class="topbar">
       <div>
         <h1>Last War • Build & Research Speed Calculator</h1>
-        <div class="tiny">
-          Formula: <span class="kbd">final = base × 100 / (100 + totalBuff)</span> • Time: <span class="kbd">days hh:mm:ss</span>
-        </div>
       </div>
       <div class="btnrow">
         <button class="secondary" onclick="copySetup('A')">Copy A → B</button>
@@ -184,7 +181,7 @@
       <div class="row cols3">
         <div>
           <!-- NEW: VIP icon -->
-          <label><img class="miniIcon" src="vip.png" alt="VIP" />VIP Level (1–18)</label>
+          <label><img class="miniIcon" src="vip.png" alt="VIP" />VIP Level</label>
           <select id="vipLevel" oninput="recalcAll()">
             <option value="0">None</option>
             <option value="1">VIP 1</option><option value="2">VIP 2</option><option value="3">VIP 3</option>
@@ -255,7 +252,7 @@
 
             <div class="row cols3">
               <div>
-                <label>🏛 Eternal Pyramid</label>
+                <label>🏛<br>Eternal Pyramid</label>
                 <select id="A_pyramidLevel" oninput="recalcAll()">
                   <option value="0">0 (0%)</option><option value="1">1 (5%)</option><option value="2">2 (10%)</option>
                   <option value="3">3 (15%)</option><option value="4">4 (25%)</option><option value="5">5 (35%)</option>
@@ -263,11 +260,11 @@
                 </select>
               </div>
               <div>
-                <label>🤝 Alliance Tech: Quick Construction</label>
+                <label>🤝<br>Alliance Tech: Quick Construction</label>
                 <input id="A_quickConstructionLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()">
               </div>
               <div>
-                <label>🧩 Commander Tech: Fast Builder</label>
+                <label>🧩<br>Commander Tech: Fast Builder</label>
                 <select id="A_fastBuilderLevel" oninput="recalcAll()">
                   <option value="0">0 (0%)</option><option value="1">1 (5%)</option><option value="2">2 (10%)</option>
                   <option value="3">3 (15%)</option><option value="4">4 (25%)</option>
@@ -310,10 +307,10 @@
             </div>
 
             <div class="row cols3">
-              <div><label>🏢 Research Center Level</label><input id="A_researchCenterLevel" type="number" min="0" max="30" value="0" oninput="recalcAll()"></div>
-              <div><label>🤝 Alliance Tech: Quick Research</label><input id="A_quickResearchLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
+              <div><label>🏢<br>Research Center Level</label><input id="A_researchCenterLevel" type="number" min="0" max="30" value="0" oninput="recalcAll()"></div>
+              <div><label>🤝<br>Alliance Tech: Quick Research</label><input id="A_quickResearchLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
               <div>
-                <label>🧩 Commander Tech: Research Enhancement</label>
+                <label>🧩<br>Commander Tech: Research Enhancement</label>
                 <select id="A_researchEnhancementLevel" oninput="recalcAll()">
                   <option value="0">0 (0%)</option><option value="1">1 (10%)</option><option value="2">2 (20%)</option>
                   <option value="3">3 (30%)</option><option value="4">4 (50%)</option>
@@ -381,16 +378,16 @@
 
             <div class="row cols3">
               <div>
-                <label>🏛 Eternal Pyramid</label>
+                <label>🏛<br>Eternal Pyramid</label>
                 <select id="B_pyramidLevel" oninput="recalcAll()">
                   <option value="0">0 (0%)</option><option value="1">1 (5%)</option><option value="2">2 (10%)</option>
                   <option value="3">3 (15%)</option><option value="4">4 (25%)</option><option value="5">5 (35%)</option>
                   <option value="6">6 (45%)</option><option value="7">7 (55%)</option>
                 </select>
               </div>
-              <div><label>🤝 Alliance Tech: Quick Construction</label><input id="B_quickConstructionLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
+              <div><label>🤝<br>Alliance Tech: Quick Construction</label><input id="B_quickConstructionLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
               <div>
-                <label>🧩 Commander Tech: Fast Builder</label>
+                <label>🧩<br>Commander Tech: Fast Builder</label>
                 <select id="B_fastBuilderLevel" oninput="recalcAll()">
                   <option value="0">0 (0%)</option><option value="1">1 (5%)</option><option value="2">2 (10%)</option>
                   <option value="3">3 (15%)</option><option value="4">4 (25%)</option>
@@ -433,10 +430,10 @@
             </div>
 
             <div class="row cols3">
-              <div><label>🏢 Research Center Level</label><input id="B_researchCenterLevel" type="number" min="0" max="30" value="0" oninput="recalcAll()"></div>
-              <div><label>🤝 Alliance Tech: Quick Research</label><input id="B_quickResearchLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
+              <div><label>🏢<br>Research Center Level</label><input id="B_researchCenterLevel" type="number" min="0" max="30" value="0" oninput="recalcAll()"></div>
+              <div><label>🤝<br>Alliance Tech: Quick Research</label><input id="B_quickResearchLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
               <div>
-                <label>🧩 Commander Tech: Research Enhancement</label>
+                <label>🧩<br>Commander Tech: Research Enhancement</label>
                 <select id="B_researchEnhancementLevel" oninput="recalcAll()">
                   <option value="0">0 (0%)</option><option value="1">1 (10%)</option><option value="2">2 (20%)</option>
                   <option value="3">3 (30%)</option><option value="4">4 (50%)</option>
