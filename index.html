@@ -204,7 +204,7 @@
           <div class="tiny" style="margin-bottom:4px;">🏛 Office (A)</div>
           <div class="radioRow"><input type="radio" name="officeA" id="A_officeNone" value="none" checked oninput="recalcAll()"><label for="A_officeNone" style="margin:0;color:var(--text)">None</label></div>
           <div class="radioRow"><input type="radio" name="officeA" id="A_officeDev" value="dev" oninput="recalcAll()"><label for="A_officeDev" style="margin:0;color:var(--text)">📐 Dev (Build +50%, Research +25%)</label></div>
-          <div class="radioRow"><input type="radio" name="officeA" id="A_officeSci" value="sci" oninput="recalcAll()"><label for="A_officeSci" style="margin:0;color:var(--text)">🧪 👨‍🔬Sci (Research +50%, Build +25%)</label></div>
+          <div class="radioRow"><input type="radio" name="officeA" id="A_officeSci" value="sci" oninput="recalcAll()"><label for="A_officeSci" style="margin:0;color:var(--text)">🧪 Sci (Research +50%, Build +25%)</label></div>
           <div class="radioRow"><input type="radio" name="officeA" id="A_officeVP" value="vp" oninput="recalcAll()"><label for="A_officeVP" style="margin:0;color:var(--text)">⭐ VP (Build +20%, Research +20%)</label></div>
         </div>
 
@@ -221,7 +221,7 @@
               <div>
                 <label>Co-op Construction (A)</label>
                 <select id="A_coopBuild" oninput="recalcAll()">
-                  <option value="0">None (0%)</option>
+                  <option value="0">False</option>
                   <option value="10">10%</option>
                   <option value="20">20%</option>
                 </select>
@@ -230,22 +230,22 @@
 
             <div class="row cols3">
               <div>
-                <label>🏛 Eternal Pyramid (0–7)</label>
+                <label>🏛 Eternal Pyramid</label>
                 <select id="A_pyramidLevel" oninput="recalcAll()">
-                  <option value="0">0 (0%)</option><option value="1">1 (5%)</option><option value="2">2 (10%)</option>
-                  <option value="3">3 (15%)</option><option value="4">4 (25%)</option><option value="5">5 (35%)</option>
-                  <option value="6">6 (45%)</option><option value="7">7 (55%)</option>
+                  <option value="0">0 0%</option><option value="1">1 5%</option><option value="2">2 10%</option>
+                  <option value="3">3 15%</option><option value="4">4 25%</option><option value="5">5 35%</option>
+                  <option value="6">6 45%</option><option value="7">7 55%</option>
                 </select>
               </div>
               <div>
-                <label>🤝 Alliance Tech: Quick Construction (0–10)</label>
+                <label>🤝 Alliance Tech: Quick Construction</label>
                 <input id="A_quickConstructionLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()">
               </div>
               <div>
-                <label>🧩 Commander: Fast Builder (0–4)</label>
+                <label>🧩 Commander: Fast Builder</label>
                 <select id="A_fastBuilderLevel" oninput="recalcAll()">
-                  <option value="0">0 (0%)</option><option value="1">1 (5%)</option><option value="2">2 (10%)</option>
-                  <option value="3">3 (15%)</option><option value="4">4 (25%)</option>
+                  <option value="0">0 0%</option><option value="1">1 5%</option><option value="2">2 10%</option>
+                  <option value="3">3 15%</option><option value="4">4 25%</option>
                 </select>
               </div>
             </div>
@@ -286,9 +286,9 @@
 
             <div class="row cols3">
               <div><label>🏢 Research Center Level</label><input id="A_researchCenterLevel" type="number" min="0" max="30" value="0" oninput="recalcAll()"></div>
-              <div><label>🤝 Alliance: Quick Research</label><input id="A_quickResearchLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
+              <div><label>🤝 Alliance Tech: Quick Research</label><input id="A_quickResearchLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
               <div>
-                <label>🧩 Commander: Research Enhancement (0–4)</label>
+                <label>🧩 Commander Tech: Research Enhancement (0–4)</label>
                 <select id="A_researchEnhancementLevel" oninput="recalcAll()">
                   <option value="0">0 0%</option><option value="1">1 10%</option><option value="2">2 20%</option>
                   <option value="3">3 30%</option><option value="4">4 50%</option>
@@ -356,16 +356,16 @@
 
             <div class="row cols3">
               <div>
-                <label>🏛 Eternal Pyramid (0–7)</label>
+                <label>🏛 Eternal Pyramid</label>
                 <select id="B_pyramidLevel" oninput="recalcAll()">
                   <option value="0">0 0%</option><option value="1">1 5%</option><option value="2">2 10%</option>
                   <option value="3">3 15%</option><option value="4">4 25%</option><option value="5">5 35%</option>
                   <option value="6">6 45%</option><option value="7">7 55%</option>
                 </select>
               </div>
-              <div><label>🤝 Alliance: Quick Construction</label><input id="B_quickConstructionLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
+              <div><label>🤝 Alliance Tech: Quick Construction</label><input id="B_quickConstructionLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
               <div>
-                <label>🧩 Commander: Fast Builder (0–4)</label>
+                <label>🧩 Commander Tech: Fast Builder</label>
                 <select id="B_fastBuilderLevel" oninput="recalcAll()">
                   <option value="0">0 0%</option><option value="1">1 5%</option><option value="2">2 10%</option>
                   <option value="3">3 15%</option><option value="4">4 25%</option>
@@ -409,9 +409,9 @@
 
             <div class="row cols3">
               <div><label>🏢 Research Center Level</label><input id="B_researchCenterLevel" type="number" min="0" max="30" value="0" oninput="recalcAll()"></div>
-              <div><label>🤝 Alliance: Quick Research</label><input id="B_quickResearchLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
+              <div><label>🤝 Alliance Tech: Quick Research</label><input id="B_quickResearchLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
               <div>
-                <label>🧩Commander: Research Enhancement</label>
+                <label>🧩Commander Tech: Research Enhancement</label>
                 <select id="B_researchEnhancementLevel" oninput="recalcAll()">
                   <option value="0">0 0%</option><option value="1">1 10%</option><option value="2">2 20%</option>
                   <option value="3">3 30%</option><option value="4">4 50%</option>
@@ -477,7 +477,7 @@
 <script>
   // ===== Survivor dropdown options =====
   const survivorOptions = [
-    ["None","None (0%)"], ["N","N (4%)"], ["R","R (8%)"], ["SR","SR (12%)"], ["SSR","SSR (16%)"], ["UR","UR (25%)"]
+    ["None","None 0%"], ["N","N 4%"], ["R","R 8%"], ["SR","SR 12%"], ["SSR","SSR 16%"], ["UR","UR 25%"]
   ];
   function fillSurvivorSelect(id){
     const el = document.getElementById(id);
