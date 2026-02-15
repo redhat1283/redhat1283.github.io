@@ -46,7 +46,6 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.25);
     }
     .panel h2{ margin:0 0 10px 0; font-size:16px; display:flex; align-items:center; gap:10px; }
-
     .icon{
       width:34px; height:34px;
       image-rendering: -webkit-optimize-contrast;
@@ -56,9 +55,8 @@
       border:1px solid var(--border);
       padding:6px;
     }
-    /* NEW: small inline icons for labels */
     .miniIcon{
-      width:50px; height: 50px;
+      width:22px; height:22px;
       image-rendering: -webkit-optimize-contrast;
       image-rendering: crisp-edges;
       display:inline-block;
@@ -158,6 +156,7 @@
       background: rgba(0,0,0,0.25);
       color:var(--text);
     }
+    .hidden{ display:none !important; }
   </style>
 </head>
 
@@ -166,6 +165,9 @@
     <div class="topbar">
       <div>
         <h1>Last War • Build & Research Speed Calculator</h1>
+        <div class="tiny">
+          Formula: <span class="kbd">final = base × 100 / (100 + totalBuff)</span> • Time: <span class="kbd">days hh:mm:ss</span>
+        </div>
       </div>
       <div class="btnrow">
         <button class="secondary" onclick="copySetup('A')">Copy A → B</button>
@@ -180,8 +182,7 @@
 
       <div class="row cols3">
         <div>
-          <!-- NEW: VIP icon -->
-          <label><img class="miniIcon" src="vip.png" alt="VIP" />VIP Level</label>
+          <label><img class="miniIcon" src="vip.png" alt="VIP" />VIP Level (1–18)</label>
           <select id="vipLevel" oninput="recalcAll()">
             <option value="0">None</option>
             <option value="1">VIP 1</option><option value="2">VIP 2</option><option value="3">VIP 3</option>
@@ -195,7 +196,6 @@
 
         <div class="checkRow">
           <input type="checkbox" id="efficientDev" oninput="recalcAll()" />
-          <!-- NEW: Efficient Dev icon -->
           <label for="efficientDev" style="margin:0;color:var(--text)">
             <img class="miniIcon" src="eff_dev.png" alt="Efficient Development" />
             Efficient Development (+10% to Building & Research)
@@ -252,7 +252,7 @@
 
             <div class="row cols3">
               <div>
-                <label>🏛<br>Eternal Pyramid</label>
+                <label>🏛 Eternal Pyramid</label>
                 <select id="A_pyramidLevel" oninput="recalcAll()">
                   <option value="0">0 (0%)</option><option value="1">1 (5%)</option><option value="2">2 (10%)</option>
                   <option value="3">3 (15%)</option><option value="4">4 (25%)</option><option value="5">5 (35%)</option>
@@ -260,11 +260,11 @@
                 </select>
               </div>
               <div>
-                <label>🤝<br>Alliance Tech: Quick Construction</label>
+                <label>🤝 Alliance Tech: Quick Construction</label>
                 <input id="A_quickConstructionLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()">
               </div>
               <div>
-                <label>🧩<br>Commander Tech: Fast Builder</label>
+                <label>🧩 Commander Tech: Fast Builder</label>
                 <select id="A_fastBuilderLevel" oninput="recalcAll()">
                   <option value="0">0 (0%)</option><option value="1">1 (5%)</option><option value="2">2 (10%)</option>
                   <option value="3">3 (15%)</option><option value="4">4 (25%)</option>
@@ -307,10 +307,10 @@
             </div>
 
             <div class="row cols3">
-              <div><label>🏢<br>Research Center Level</label><input id="A_researchCenterLevel" type="number" min="0" max="30" value="0" oninput="recalcAll()"></div>
-              <div><label>🤝<br>Alliance Tech: Quick Research</label><input id="A_quickResearchLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
+              <div><label>🏢 Research Center Level</label><input id="A_researchCenterLevel" type="number" min="0" max="30" value="0" oninput="recalcAll()"></div>
+              <div><label>🤝 Alliance Tech: Quick Research</label><input id="A_quickResearchLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
               <div>
-                <label>🧩<br>Commander Tech: Research Enhancement</label>
+                <label>🧩 Commander Tech: Research Enhancement</label>
                 <select id="A_researchEnhancementLevel" oninput="recalcAll()">
                   <option value="0">0 (0%)</option><option value="1">1 (10%)</option><option value="2">2 (20%)</option>
                   <option value="3">3 (30%)</option><option value="4">4 (50%)</option>
@@ -378,16 +378,16 @@
 
             <div class="row cols3">
               <div>
-                <label>🏛<br>Eternal Pyramid</label>
+                <label>🏛 Eternal Pyramid</label>
                 <select id="B_pyramidLevel" oninput="recalcAll()">
                   <option value="0">0 (0%)</option><option value="1">1 (5%)</option><option value="2">2 (10%)</option>
                   <option value="3">3 (15%)</option><option value="4">4 (25%)</option><option value="5">5 (35%)</option>
                   <option value="6">6 (45%)</option><option value="7">7 (55%)</option>
                 </select>
               </div>
-              <div><label>🤝<br>Alliance Tech: Quick Construction</label><input id="B_quickConstructionLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
+              <div><label>🤝 Alliance Tech: Quick Construction</label><input id="B_quickConstructionLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
               <div>
-                <label>🧩<br>Commander Tech: Fast Builder</label>
+                <label>🧩 Commander Tech: Fast Builder</label>
                 <select id="B_fastBuilderLevel" oninput="recalcAll()">
                   <option value="0">0 (0%)</option><option value="1">1 (5%)</option><option value="2">2 (10%)</option>
                   <option value="3">3 (15%)</option><option value="4">4 (25%)</option>
@@ -430,10 +430,10 @@
             </div>
 
             <div class="row cols3">
-              <div><label>🏢<br>Research Center Level</label><input id="B_researchCenterLevel" type="number" min="0" max="30" value="0" oninput="recalcAll()"></div>
-              <div><label>🤝<br>Alliance Tech: Quick Research</label><input id="B_quickResearchLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
+              <div><label>🏢 Research Center Level</label><input id="B_researchCenterLevel" type="number" min="0" max="30" value="0" oninput="recalcAll()"></div>
+              <div><label>🤝 Alliance Tech: Quick Research</label><input id="B_quickResearchLevel" type="number" min="0" max="10" value="0" oninput="recalcAll()"></div>
               <div>
-                <label>🧩<br>Commander Tech: Research Enhancement</label>
+                <label>🧩 Commander Tech: Research Enhancement</label>
                 <select id="B_researchEnhancementLevel" oninput="recalcAll()">
                   <option value="0">0 (0%)</option><option value="1">1 (10%)</option><option value="2">2 (20%)</option>
                   <option value="3">3 (30%)</option><option value="4">4 (50%)</option>
@@ -492,6 +492,56 @@
       <div class="miniRow">
         <div class="tiny">Δ shows “B minus A” (negative means B is faster).</div>
         <button class="secondary" onclick="copyResultsToClipboard()">Copy Results Summary</button>
+      </div>
+    </div>
+
+    <!-- Appointment Planner -->
+    <div class="panel" style="margin-top:14px;">
+      <h2>Appointment Planner (Server Time GMT-2)</h2>
+
+      <div class="row cols2">
+        <div>
+          <label>Use Setup</label>
+          <select id="appt_setup" oninput="recalcAll()">
+            <option value="A">Setup A</option>
+            <option value="B">Setup B</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Type</label>
+          <select id="appt_type" oninput="recalcAll()">
+            <option value="build">Building</option>
+            <option value="research">Research</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row cols2">
+        <div>
+          <label>Appointment Start (Server Time, GMT-2)<br><span class="tiny">Format: YYYY-MM-DD HH:MM:SS</span></label>
+          <input id="appt_start" type="text" value="2026-02-13 06:52:36" oninput="recalcAll()">
+        </div>
+
+        <div id="appt_officeWrap">
+          <label>Office Available At (Server Time, GMT-2)<br><span class="tiny">Required if an office is selected for the chosen setup</span></label>
+          <input id="appt_officeAt" type="text" value="" placeholder="2026-02-13 07:00:00" oninput="recalcAll()">
+        </div>
+      </div>
+
+      <div class="resultBox">
+        <p class="big" id="appt_finish">Finish (Server Time): —</p>
+        <p class="sub">
+          <span class="pill">Wait <strong id="appt_wait">—</strong></span>
+          <span class="pill">Start <strong id="appt_effStart">—</strong></span>
+          <span class="pill">Buffed Duration <strong id="appt_duration">—</strong></span>
+        </p>
+        <div class="chips" id="appt_chips"></div>
+      </div>
+
+      <div class="note">
+        Office buffs apply only if the office is active when you START the task (not phased).
+        This planner will automatically wait until the office time if an office is selected.
       </div>
     </div>
   </div>
@@ -623,6 +673,39 @@
     return `${sign}${formatTime(Math.abs(delta))}`;
   }
 
+  // ===== Server time helpers (GMT-2) =====
+  const SERVER_TZ_OFFSET = "-02:00"; // Server Time = GMT-2
+
+  function parseServerDateTime(str){
+    if (!str) return null;
+    str = String(str).trim();
+    if (!str) return null;
+
+    const iso = str.replace(" ", "T");
+    const hasSeconds = iso.match(/T\d\d:\d\d:\d\d$/);
+    const isoFixed = hasSeconds ? iso : (iso.match(/T\d\d:\d\d$/) ? (iso + ":00") : iso);
+
+    const d = new Date(isoFixed + SERVER_TZ_OFFSET);
+    return isNaN(d.getTime()) ? null : d;
+  }
+
+  function formatServerDateTime(d){
+    if (!d || isNaN(d.getTime())) return "—";
+    const ms = d.getTime();
+
+    // Offset -02:00 => server wall time = UTC - 2h
+    const serverMs = ms - (2 * 3600 * 1000);
+    const sd = new Date(serverMs);
+
+    const Y = sd.getUTCFullYear();
+    const M = String(sd.getUTCMonth()+1).padStart(2,"0");
+    const D = String(sd.getUTCDate()).padStart(2,"0");
+    const h = String(sd.getUTCHours()).padStart(2,"0");
+    const m = String(sd.getUTCMinutes()).padStart(2,"0");
+    const s = String(sd.getUTCSeconds()).padStart(2,"0");
+    return `${Y}-${M}-${D} ${h}:${m}:${s}`;
+  }
+
   // ===== UI helpers =====
   function chip(label, pct){
     if (!pct) return "";
@@ -633,6 +716,11 @@
   function setHTML(id, html){ const el = document.getElementById(id); if (el) el.innerHTML = html; }
   function getVal(id){ const el = document.getElementById(id); return el ? el.value : ""; }
   function getNum(id){ const v = parseFloat(getVal(id)); return Number.isFinite(v) ? v : 0; }
+  function showEl(id, show){
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.toggle("hidden", !show);
+  }
 
   function getSelectedOffice(prefix){
     const checked = document.querySelector(`input[name="office${prefix}"]:checked`);
@@ -651,27 +739,11 @@
 
   // Everything else in Setup B is forced to match Setup A:
   const SYNC_KEYS_A_TO_B = [
-    // base times too
-    "buildBase",
-    "researchBase",
-
-    // building
-    "pyramidLevel",
-    "quickConstructionLevel",
-    "fastBuilderLevel",
-    "buildBuff1",
-    "buildBuff2",
-
-    // research
-    "researchCenterLevel",
-    "quickResearchLevel",
-    "researchEnhancementLevel",
-    "survivor1",
-    "survivor2",
-    "survivor3",
-    "survivor4",
-    "researchBuff1",
-    "researchBuff2"
+    "buildBase","researchBase",
+    "pyramidLevel","quickConstructionLevel","fastBuilderLevel","buildBuff1","buildBuff2",
+    "researchCenterLevel","quickResearchLevel","researchEnhancementLevel",
+    "survivor1","survivor2","survivor3","survivor4",
+    "researchBuff1","researchBuff2"
   ];
 
   function syncAtoBSharedFields(){
@@ -794,19 +866,89 @@
     setHTML(`${prefix}_researchChips`, researchChips || `<span class="tiny">No buffs selected.</span>`);
   }
 
+  // ===== Appointment Planner (not phased; office must be active at start) =====
+  function updateAppointmentPlanner(){
+    const setup = getVal("appt_setup") || "A";
+    const type = getVal("appt_type") || "build";
+
+    const start = parseServerDateTime(getVal("appt_start"));
+    const officeAt = parseServerDateTime(getVal("appt_officeAt"));
+
+    const data = calcSetup(setup);
+    const officeKey = data.officeKey; // none/dev/sci/vp
+
+    // Hide office input unless an office is selected
+    showEl("appt_officeWrap", officeKey !== "none");
+
+    if (!start){
+      setText("appt_finish", "Finish (Server Time): —");
+      setText("appt_wait", "—");
+      setText("appt_effStart", "—");
+      setText("appt_duration", "—");
+      setHTML("appt_chips", `<span class="tiny">Enter a valid Appointment Start time.</span>`);
+      return;
+    }
+
+    // Required if office selected
+    if (officeKey !== "none" && !officeAt){
+      setText("appt_finish", "Finish (Server Time): —");
+      setText("appt_wait", "—");
+      setText("appt_effStart", "—");
+      setText("appt_duration", "—");
+      setHTML("appt_chips", `<span class="tiny">Office is selected (${officeKey.toUpperCase()}), so “Office Available At” is required.</span>`);
+      return;
+    }
+
+    // Buffed duration seconds depends on type
+    const buffedSeconds = (type === "research") ? data.research.final : data.build.final;
+
+    // If office selected and officeAt is after start, you must wait (not phased)
+    let effectiveStart = start;
+    let waitSeconds = 0;
+
+    if (officeKey !== "none" && officeAt.getTime() > start.getTime()){
+      waitSeconds = Math.floor((officeAt.getTime() - start.getTime()) / 1000);
+      effectiveStart = officeAt;
+    }
+
+    const finish = new Date(effectiveStart.getTime() + (buffedSeconds * 1000));
+
+    setText("appt_finish", `Finish (Server Time): ${formatServerDateTime(finish)}`);
+    setText("appt_wait", formatTime(waitSeconds));
+    setText("appt_effStart", formatServerDateTime(effectiveStart));
+    setText("appt_duration", formatTime(buffedSeconds));
+
+    const pct = (type === "research") ? data.research.total : data.build.total;
+    const mult = speedMultiplier(pct).toFixed(2);
+
+    const chips =
+      `<span class="chip"><span class="k">Using</span><span class="v">${setup} / ${type}</span></span>` +
+      `<span class="chip"><span class="k">Office</span><span class="v">${officeKey.toUpperCase()}</span></span>` +
+      `<span class="chip"><span class="k">Total Buff</span><span class="v">+${pct.toFixed(2)}%</span></span>` +
+      `<span class="chip"><span class="k">Speed</span><span class="v">${mult}x</span></span>` +
+      `<span class="chip"><span class="k">Wait</span><span class="v">${formatTime(waitSeconds)}</span></span>`;
+    setHTML("appt_chips", chips);
+  }
+
   // ===== Auto-save =====
-  const STORAGE_KEY = "lw_speed_calc_v4";
+  const STORAGE_KEY = "lw_speed_calc_v5";
 
   function collectState(){
     const ids = [
       "vipLevel","efficientDev","conquerorBonus",
-      // offices per-setup
+
+      // Appointment Planner
+      "appt_setup","appt_type","appt_start","appt_officeAt",
+
+      // Offices per-setup
       "A_officeNone","A_officeDev","A_officeSci","A_officeVP",
       "B_officeNone","B_officeDev","B_officeSci","B_officeVP",
+
       // A
       "A_buildBase","A_coopBuild","A_pyramidLevel","A_quickConstructionLevel","A_fastBuilderLevel","A_buildBuff1","A_buildBuff2",
       "A_researchBase","A_coopResearch","A_researchCenterLevel","A_quickResearchLevel","A_researchEnhancementLevel",
       "A_survivor1","A_survivor2","A_survivor3","A_survivor4","A_researchBuff1","A_researchBuff2",
+
       // B (stored; shared fields overwritten from A)
       "B_buildBase","B_coopBuild","B_pyramidLevel","B_quickConstructionLevel","B_fastBuilderLevel","B_buildBuff1","B_buildBuff2",
       "B_researchBase","B_coopResearch","B_researchCenterLevel","B_quickResearchLevel","B_researchEnhancementLevel",
@@ -919,6 +1061,7 @@
     setText("cmp_resB", formatTime(B.research.final));
     setText("cmp_resDelta", formatDeltaSeconds(B.research.final - A.research.final));
 
+    updateAppointmentPlanner();
     saveState();
   }
 
